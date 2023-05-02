@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP: Library</title>
     <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
 </head>
 <body>
     <header>
@@ -15,19 +16,47 @@
         </div>
     </header>
     <main>
-        <button>Add a Book</button>
+        <button id="modal-btn" class="btn">Add a Book</button>
         <div class="book-container">
-            <div class="book-card">
-                <p>Title: </p>
-                <p>Author: </p>
-                <p>Pages: </p>
-                <button>Read</button>
-                <button>Delete</button>
-            </div>
+            <!-- <div class="book-card">
+                <div class="key-val">
+                    <p>Title: <span class="input-title">"Title"</span></p>
+                    <p>Author: <span class="input-author">Author</span></p>
+                    <p>Pages: <span class="input-page">123</span></p>
+                </div>
+                <button class="btn">Read</button>
+                <button class="btn">Delete</button>
+            </div> -->
         </div>
     </main>
     <footer>
         <p>Library from <a href="#">The Odin Project</a> by <a href="#">Lits</a></p>
     </footer>
+    <div class="modal">
+        <div class="input-form">
+            <div>
+                <label for="title">Title: </label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div>
+                <label for="author">Author: </label>
+                <input type="text" name="author" id="author">
+            </div>
+            <div>
+                <label for="pages">Pages: </label>
+                <input type="number" name="pages" id="pages">
+            </div>
+            <div class="btn-options">
+                <div>
+                    <input type="checkbox" name="status">
+                    <label for="status">Have you read this book?</label>
+                </div>
+                <div class="submit-cancel">
+                    <button id="submit" class="btn">Submit</button>
+                    <button id="cancel" class="btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
