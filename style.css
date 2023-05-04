@@ -10,11 +10,15 @@
     padding: 0;
     box-sizing: border-box;
     color: var(--fade);
+    font-family: 'Montserrat', sans-serif;
 }
 
 body{
     background-color: var(--main);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header{
@@ -37,13 +41,15 @@ h1:hover{
 }
 
 main{
-    padding: 1rem;
+    padding: 1rem 10%;
+    flex: 1;
 }
 
 .book-container{
     margin-top: 2rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
 }
 
 .book-card{
@@ -52,15 +58,15 @@ main{
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 3rem;
     text-align: left;
 }
 
-.key-val{
-    padding: 0 2rem;
+.book-info{
+    padding: 0 1rem;
 }
 
-.book-card p {
+.book-card p {  
     display: flex;
     justify-content: space-between;
     line-height: 1.5;
@@ -72,8 +78,9 @@ main{
 }
 
 footer{
-    position: absolute;
-    bottom: 1rem;
+    position: relative;
+    padding: 1rem;
+    bottom: 0;
     width: 100%;
 }
 
@@ -103,6 +110,12 @@ footer{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+input{
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    padding: .5rem;
 }
 
 .btn-options{
