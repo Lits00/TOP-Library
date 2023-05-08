@@ -92,6 +92,11 @@ function updateBookStatus(bookTitle, bookStatus){
     if(i !== -1) library[i].read = bookStatus;
 };
 
+function deleteBook(bookTitle){
+    const i = library.findIndex((book) => book.title === bookTitle);
+    if(i !== -1) library.splice(i, 1);
+}
+
 function resetModal() {
     title.value = '';
     author.value = '';
@@ -123,13 +128,22 @@ modal.addEventListener('click', (event) => {
     if(event.target === modal) closeModal();
 });
 
-// Updates the status button from book card
+// Book Status and Delete func
 document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('status')) {
+    // Updates the status button from book card
+    if(event.target.classList.contains('status')) {
       const bookCard = event.target.closest('.book-card');
       const bookTitle = bookCard.querySelector('.input-title').textContent;
       const bookStatus = (event.target.textContent === 'Read') ? 'Not read' : 'Read';
       event.target.textContent = bookStatus;
       updateBookStatus(bookTitle, bookStatus);
     }
-  });
+
+    // Deletes the book from the list
+    if(event.target.classList.contains('delete')) {
+        const bookCard = event.target.closest('.book-card');
+        bookTitle = bookCard.querySelector('.input-title').textContent;
+        bookCard.parentNode.removeChild(bookCard);
+        deleteBook(bookTitle);
+    }
+});
