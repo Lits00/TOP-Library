@@ -86,10 +86,11 @@ function createBookCard() {
     bookCard.appendChild(deleteBook);
 };
 
-// function updateBookStatus(bookTitle, bookStatus){
-//     const i = library.findIndex((book) => book.title === bookTitle);
-//     if(i !== -1) library[i].status = bookStatus;
-// };
+// Updates the book status from the array
+function updateBookStatus(bookTitle, bookStatus){
+    const i = library.findIndex((book) => book.title === bookTitle);
+    if(i !== -1) library[i].read = bookStatus;
+};
 
 function resetModal() {
     title.value = '';
@@ -122,12 +123,13 @@ modal.addEventListener('click', (event) => {
     if(event.target === modal) closeModal();
 });
 
-// statusBtns.forEach((btn) => {
-//     btn.addEventListener('click', () => {
-//         console.log('here')
-//         console.log(button.parentElement.querySelector('.input-title').textContent)
-//         const bookTitle = button.parentElement.querySelector('.input-title').textContent;
-//         const bookStatus = (button.textContent === 'Read') ? button.textContent = 'Not read' : button.textContent = 'Read';
-//         updateBookStatus(bookTitle, bookStatus);
-//     })
-// })
+// Updates the status button from book card
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('status')) {
+      const bookCard = event.target.closest('.book-card');
+      const bookTitle = bookCard.querySelector('.input-title').textContent;
+      const bookStatus = (event.target.textContent === 'Read') ? 'Not read' : 'Read';
+      event.target.textContent = bookStatus;
+      updateBookStatus(bookTitle, bookStatus);
+    }
+  });
