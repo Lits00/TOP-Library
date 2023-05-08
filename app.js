@@ -1,10 +1,10 @@
-let Library = [];
+let library = [];
 
 // Inputs
 const title = document.getElementById('title');
 const author = document.getElementById('author');
 const pages = document.getElementById('pages');
-const status = document.getElementById('status');
+const isRead = document.getElementById('status');
 
 // Buttons
 const addBookBtn = document.getElementById('add-book');
@@ -17,7 +17,7 @@ const deleteBtn = document.querySelector('.delete');
 // Book constructor
 function Book(title, author, pages, read) {
     this.title = title;
-    this. author = author;
+    this.author = author;
     this.pages = pages;
     this.read = read;
     this.info = function() {
@@ -27,6 +27,7 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary() {
     createBookCard();
+    resetModal();
     closeModal();
 };
 
@@ -34,56 +35,84 @@ function createBookCard() {
     const bookContainer = document.querySelector('.book-container');
     const bookCard = document.createElement('div');
     const bookInfo = document.createElement('div');
-    const bookTitle = document.createElement('p');
-    const bookAuthor = document.createElement('p');
-    const bookPages = document.createElement('p');
+    const pTitle = document.createElement('p');
+    const pAuthor = document.createElement('p');
+    const pPages = document.createElement('p');
+    const inputTitle = document.createElement('span');
+    const inputAuthor = document.createElement('span');
+    const inputPages = document.createElement('span');
     const bookStatus = document.createElement('button');
     const deleteBook = document.createElement('button');
+    
+    const bookTitle = title.value;
+    const bookAuthor = author.value;
+    const bookPages = pages.value;
+    const read = isRead.checked ? "Read" : "Not read";
+
+    const book = new Book(bookTitle, bookAuthor, bookPages, read);
+    library.push(book);
 
     bookCard.classList.add('book-card');
     bookInfo.classList.add('book-info');
 
-    bookTitle.classList.add('book-title');
-    bookTitle.textContent = "Title: ";
+    pTitle.classList.add('book-title');
+    pTitle.textContent = "Title: ";
+    inputTitle.classList.add('input-title');
+    inputTitle.textContent = bookTitle;
 
-    bookAuthor.classList.add('book-author');
-    bookAuthor.textContent = "Author: ";
+    pAuthor.classList.add('book-author');
+    pAuthor.textContent = "Author: ";
+    inputAuthor.classList.add('input-author');
+    inputAuthor.textContent = bookAuthor;
 
-    bookPages.classList.add('book-pages');
-    bookPages.textContent = "Pages: ";
+    pPages.classList.add('book-pages');
+    pPages.textContent = "Pages: ";
+    inputPages.classList.add('input-pages');
+    inputPages.textContent = bookPages;
 
     bookStatus.classList.add('btn', 'status');
+    bookStatus.textContent = read;
     deleteBook.classList.add('btn', 'delete');
     deleteBook.textContent = "Delete"
     
     bookContainer.appendChild(bookCard);
     bookCard.appendChild(bookInfo);
-    bookInfo.appendChild(bookTitle);
-    bookInfo.appendChild(bookAuthor);
-    bookInfo.appendChild(bookPages);
+    bookInfo.appendChild(pTitle);
+    pTitle.appendChild(inputTitle);
+    bookInfo.appendChild(pAuthor);
+    pAuthor.appendChild(inputAuthor);
+    bookInfo.appendChild(pPages);
+    pPages.appendChild(inputPages);
     bookCard.appendChild(bookStatus);
     bookCard.appendChild(deleteBook);
 };
 
-function closeModal(){
+function resetModal() {
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    isRead.checked = false; 
+}
+
+function closeModal() {
     modal.style.display = 'none';
 };
 
 addBookBtn.addEventListener('click', () => modal.style.display = 'block');
 
-// submitBtn.addEventListener('click', (event) => {
-//     event.preventDefault();
-//     addBookToLibrary();
-// });
+submitBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    addBookToLibrary();
+});
 
-// cancelBtn.addEventListener('click', (event) => {
-//     event.preventDefault();
-//     closeModal();
-// });
+cancelBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    closeModal();
+});
 
-submitBtn.addEventListener('click', addBookToLibrary);
+// submitBtn.addEventListener('click', addBookToLibrary);
 
-cancelBtn.addEventListener('click', closeModal);
+// cancelBtn.addEventListener('click', closeModal);
 
 modal.addEventListener('click', (event) => {
     if(event.target === modal) closeModal();
