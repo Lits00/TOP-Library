@@ -87,7 +87,6 @@ footer{
 /* Pop up modal */
 
 .modal{
-    background-color: var(--main);
     position: fixed;
     top: 0;
     left: 0;
